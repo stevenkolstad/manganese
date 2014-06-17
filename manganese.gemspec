@@ -6,8 +6,8 @@ require 'manganese/version'
 Gem::Specification.new do |spec|
   spec.name          = "manganese"
   spec.version       = Manganese::VERSION
-  spec.authors       = ["Marco Sanson"]
-  spec.email         = ["marco.sanson@gmail.com"]
+  spec.authors       = ["Marco Sanson", "Andrea Dal Ponte"]
+  spec.email         = ["marco.sanson@gmail.com", "dalpo85@gmail.com"]
   spec.summary       = %q{TODO: Write a short summary. Required.}
   spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ""
