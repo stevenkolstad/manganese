@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-group :development, :test do
+group :development do
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
