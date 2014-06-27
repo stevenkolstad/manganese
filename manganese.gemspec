@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "manganese"
   spec.version       = Manganese::VERSION
   spec.authors       = ["Marco Sanson", "Andrea Dal Ponte"]
-  spec.email         = ["marco.sanson@gmail.com", "dalpo85@gmail.com"]
+  spec.email         = ["marco.sanson@gmail.com", "info@andreadalponte.com"]
   spec.summary       = %q{Mongoid multi tenant using multiple database}
   spec.description   = %q{Mongoid multi tenant using multiple database}
   spec.homepage      = "https://github.com/marcosanson/manganese"

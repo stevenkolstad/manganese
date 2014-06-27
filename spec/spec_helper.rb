@@ -1,17 +1,21 @@
-
-
 # Configure Rails Environment
-ENV['RAILS_ENV'] = 'test'
+ENV['RAILS_ENV'] ||= 'test'
 
-require File.expand_path('../dummy/config/environment.rb', __FILE__)
-require 'rspec/rails'
+require 'manganese'
 require 'database_cleaner'
 require 'factory_girl'
 require 'simplecov'
 
+Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
+
 # Run Coverage report
 SimpleCov.start do
-  add_filter 'spec/dummy'
+  add_filter '/spec/dummy'
+  add_filter '/spec/'
+end
+
+Mongoid.configure do |config|
+  config.connect_to "manganese_test"
 end
 
 # The `.rspec` file also contains a few flags that are not defaults but that
@@ -19,27 +23,7 @@ end
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
-
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = false
-
-  # RSpec Rails can automatically mix in different behaviours to your tests
-  # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
-  #
-  # You can disable this behaviour by removing the line below, and instead
-  # explicitly tag your specs with their type, e.g.:
-  #
-  #     RSpec.describe UsersController, :type => :controller do
-  #       # ...
-  #     end
-  #
-  # The different available types are documented in the features, such as in
-  # https://relishapp.com/rspec/rspec-rails/docs
-  config.infer_spec_type_from_file_location!
+  # config.include FactoryGirl::Syntax::Methods
 
   # These two settings work together to allow you to limit a spec run
   # to individual examples or groups you care about by tagging them with
@@ -120,4 +104,3 @@ RSpec.configure do |config|
     end
   end
 end
-

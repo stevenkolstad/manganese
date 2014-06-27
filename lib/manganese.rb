@@ -1,6 +1,8 @@
-require "manganese/version"
-require "manganese/tenant"
-require "manganese/tenancy"
+require 'active_support/concern'
+require 'mongoid'
+require 'manganese/version'
+require 'manganese/tenant'
+require 'manganese/tenancy'
 
 module Manganese
   class << self
