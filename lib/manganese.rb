@@ -3,9 +3,7 @@ require "manganese/tenant"
 require "manganese/tenancy"
 
 module Manganese
-
   class << self
-
     def current_tenant=(tenant)
       self.default_db
       Thread.current[:tenant] = tenant
@@ -18,7 +16,5 @@ module Manganese
     def default_db
       @default_db ||= Mongoid.default_session.options[:database]
     end
-
   end
-
 end
