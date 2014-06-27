@@ -3,7 +3,7 @@ module Manganese
     extend ActiveSupport::Concern
 
     def switch_db
-      Manganese.current_tenant = "#{Rails.env}_#{self._id}"
+      Manganese.current_tenant = "#{::Manganese.default_db}_#{self._id}"
     end
 
     def reset_db

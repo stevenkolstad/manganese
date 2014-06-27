@@ -1,6 +1,6 @@
 # Manganese
 
-TODO: Write a gem description
+Mongoid multi tenant using multiple database
 
 ## Installation
 

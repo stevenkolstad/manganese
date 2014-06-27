@@ -7,6 +7,7 @@ require 'factory_girl'
 require 'simplecov'
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), 'factories/**/*.rb')].each { |f| require f }
 
 # Run Coverage report
 SimpleCov.start do
@@ -23,7 +24,7 @@ end
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  # config.include FactoryGirl::Syntax::Methods
+  config.include FactoryGirl::Syntax::Methods
 
   # These two settings work together to allow you to limit a spec run
   # to individual examples or groups you care about by tagging them with
