@@ -90,6 +90,8 @@ RSpec.configure do |config|
   end
 
   config.around(:each) do |example|
+    Manganese.reset_tenant!
+
     DatabaseCleaner.cleaning do
       example.run
     end
