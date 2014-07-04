@@ -1,7 +1,7 @@
 # Configure Rails Environment
 ENV['RAILS_ENV'] ||= 'test'
 
-require 'manganese'
+require 'manganese/testing'
 require 'database_cleaner'
 require 'factory_girl'
 require 'simplecov'
@@ -105,5 +105,20 @@ RSpec.configure do |config|
     ensure
       DatabaseCleaner.clean
     end
+  end
+
+  config.before(:each) do |example|
+    if example.metadata[:sidekiq] == :fake
+      Manganese::Testing.fake!
+    elsif example.metadata[:sidekiq] == :live
+      Manganese::Testing.live!
+    elsif example.metadata[:type] == :acceptance
+      Manganese::Testing.live!
+    else
+      Manganese::Testing.fake!
+    end
+  end
+
+  config.before(:each) do
   end
 end

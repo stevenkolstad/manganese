@@ -9,6 +9,5 @@ module Manganese
     def reset_db
       Manganese.current_tenant = nil
     end
-
   end
 end

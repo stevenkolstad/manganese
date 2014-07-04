@@ -23,6 +23,8 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+## Testing
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/manganese/fork )
