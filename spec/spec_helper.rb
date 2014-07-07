@@ -5,6 +5,7 @@ require 'manganese/testing'
 require 'database_cleaner'
 require 'factory_girl'
 require 'simplecov'
+require 'pry'
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 Dir[File.join(File.dirname(__FILE__), 'factories/**/*.rb')].each { |f| require f }
@@ -106,9 +107,9 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do |example|
-    if example.metadata[:sidekiq] == :fake
+    if example.metadata[:manganese] == :fake
       Manganese::Testing.fake!
-    elsif example.metadata[:sidekiq] == :live
+    elsif example.metadata[:manganese] == :live
       Manganese::Testing.live!
     elsif example.metadata[:type] == :acceptance
       Manganese::Testing.live!

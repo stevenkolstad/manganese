@@ -1,7 +1,6 @@
 require 'manganese'
 
 module Manganese
-
   class Testing
     class << self
       attr_accessor :__test_mode
@@ -42,32 +41,41 @@ module Manganese
     alias_method :real_current_tenant=, :current_tenant=
     alias_method :real_current_tenant,  :current_tenant
     alias_method :real_reset_tenant!,   :reset_tenant!
+    alias_method :real_current_session, :current_session
 
     def current_tenant=(database_name)
-      tenant_history << database_name
+      self.tenants_history << database_name
 
       if Manganese::Testing.fake?
-        tenant_history.last
+        self.tenants_history.last
       else
-        real_current_tenant = database_name
+        self.real_current_tenant = database_name
       end
+    end
+
+    def tenants_history
+      @tenants_history ||= [ Manganese.default_db ]
     end
 
     def current_tenant
       if Manganese::Testing.fake?
-        tenant_history.last
+        self.tenants_history.last
       else
-        real_current_tenant
+        self.real_current_tenant
       end
     end
 
     def reset_tenant!
-      tenant_history << Manganese.default_db
-      real_reset_tenant!
+      self.tenants_history << Manganese.default_db
+      self.real_reset_tenant!
     end
 
-    def tenant_history
-      @tenant_history ||= [ Manganese.default_db ]
+    def current_session(&block)
+      if Manganese::Testing.fake?
+        Mongoid.default_session().with(database: Manganese.default_db, &block)
+      else
+        self.real_current_session(&block)
+      end
     end
   end
 
@@ -79,7 +87,7 @@ module Manganese
         if Manganese::Testing.fake?
           Manganese.default_db
         else
-          real_current_tenant_name
+          self.real_current_tenant_name
         end
       end
     end
