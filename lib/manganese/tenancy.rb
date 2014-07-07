@@ -3,7 +3,7 @@ module Manganese
     extend ActiveSupport::Concern
 
     included do
-      store_in database: -> { current_tenant_name }
+      store_in database: -> { self.current_tenant_name }
     end
 
     def current_tenant_name

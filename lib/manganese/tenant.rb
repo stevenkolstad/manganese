@@ -7,7 +7,7 @@ module Manganese
     end
 
     def reset_db
-      Manganese.current_tenant = nil
+      Manganese.reset_tenant!
     end
   end
 end
