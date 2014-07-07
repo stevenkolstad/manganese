@@ -5,7 +5,6 @@ require 'manganese/testing'
 require 'database_cleaner'
 require 'factory_girl'
 require 'simplecov'
-require 'pry'
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 Dir[File.join(File.dirname(__FILE__), 'factories/**/*.rb')].each { |f| require f }
