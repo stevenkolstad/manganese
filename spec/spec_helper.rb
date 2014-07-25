@@ -1,19 +1,15 @@
 # Configure Rails Environment
 ENV['RAILS_ENV'] ||= 'test'
 
+require "codeclimate-test-reporter"
 require 'manganese/testing'
 require 'database_cleaner'
 require 'factory_girl'
-require 'simplecov'
+
+CodeClimate::TestReporter.start
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 Dir[File.join(File.dirname(__FILE__), 'factories/**/*.rb')].each { |f| require f }
-
-# Run Coverage report
-SimpleCov.start do
-  add_filter '/spec/dummy'
-  add_filter '/spec/'
-end
 
 Mongoid.configure do |config|
   config.connect_to "manganese_test"

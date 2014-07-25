@@ -10,3 +10,6 @@ matrix:
     - rvm: ruby-head
 services:
   - mongodb
+addons:
+  code_climate:
+    repo_token: secret_token
