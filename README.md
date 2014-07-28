@@ -3,6 +3,7 @@
 Mongoid multi tenant using multiple database
 
 [![Build Status](https://travis-ci.org/marcosanson/manganese.svg?branch=master)](https://travis-ci.org/marcosanson/manganese)
+[![Test Coverage](https://codeclimate.com/github/marcosanson/manganese/coverage.png)](https://codeclimate.com/github/marcosanson/manganese)
 [![Code Climate](https://codeclimate.com/github/marcosanson/manganese.png)](https://codeclimate.com/github/marcosanson/manganese)
 [![Inline docs](http://inch-ci.org/github/marcosanson/manganese.png)](http://inch-ci.org/github/marcosanson/manganese)
 
@@ -10,19 +11,13 @@ Mongoid multi tenant using multiple database
 
 Add this line to your application's Gemfile:
 
-    gem 'manganese'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install manganese
+```ruby
+gem 'manganese', github: 'marcosanson/manganese'
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+TODO: Working progress...
 
 ## Testing
 

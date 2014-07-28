@@ -12,4 +12,4 @@ services:
   - mongodb
 addons:
   code_climate:
-    repo_token: secret_token
+    repo_token: db8e0401a58f09ed237620304610a93a63dd4f4983175a7f7e73dcc8891e3f6e
