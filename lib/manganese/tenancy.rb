@@ -10,9 +10,25 @@ module Manganese
       self.class.current_tenant_name
     end
 
+    def manganese_tenat?
+      false
+    end
+
+    def manganese_tenancy?
+      true
+    end
+
     module ClassMethods
       def current_tenant_name
         Manganese.current_tenant
+      end
+
+      def manganese_tenat?
+        false
+      end
+
+      def manganese_tenancy?
+        true
       end
     end
   end

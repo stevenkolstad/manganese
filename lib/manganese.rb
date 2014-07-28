@@ -6,6 +6,12 @@ require 'manganese/version'
 require 'manganese/tenant'
 require 'manganese/tenancy'
 
+# If we are using Rails then we will include the Mongoid railtie.
+# This has all the nifty initializers that Manganese needs.
+if defined?(Rails)
+  require 'manganese/railtie'
+end
+
 module Manganese
   class << self
     def default_db
@@ -27,9 +33,10 @@ module Manganese
 
     # Retrive the current session
     #
-    # Manganese.current_session do |session|
-    #   session[:sample_collection_name]
-    # end
+    # @example Retrieve a `sample_collection` in the current tenant
+    #   Manganese.current_session do |session|
+    #     session[:sample_collection]
+    #   end
     def current_session(&block)
       Mongoid.default_session().with(database: Manganese.current_tenant, &block)
     end
