@@ -16,8 +16,12 @@ module Manganese
       def define
         namespace :'db:manganese' do
           desc 'Create the indexes defined on your mongoid models foreach tenat'
-          task create_indexes: [:environment, :'db:mongoid:load_models'] do
-            self.create_indexes!
+          task :create_indexes, [:tenant] => [:environment, :'db:mongoid:load_models'] do |t, args|
+            if args[:tenant].present?
+              self.create_tenant_indexes(args[:tenant])
+            else
+              self.create_indexes
+            end
           end
         end
       end
@@ -31,22 +35,25 @@ module Manganese
 
       def create_main_database_indexes
         logger.info "MANGANESE: Creating indexes for the main '#{Manganese.default_db}' database"
+
         Mongoid::Tasks::Database.create_indexes
       end
 
-      def create_tenant_indexes(model)
-        logger.info "MANGANESE: Creating indexes for the tenant '#{model.tenant_name}' database"
-        model.switch_db
-        Mongoid::Tasks::Database.create_indexes
+      def create_tenant_indexes(tenant_name)
+        logger.info "MANGANESE: Creating indexes for the tenant '#{tenant_name}' database"
+
+        Manganese.with_tenant tenant_name do
+          Mongoid::Tasks::Database.create_indexes
+        end
       end
 
       # Create indexes foreach Tenant
-      def create_indexes!
+      def create_indexes
         self.create_main_database_indexes
 
         self.tenant_models.each do |model|
-          model.each do |tenant|
-            self.create_tenant_indexes(tenant)
+          model.each do |m|
+            self.create_tenant_indexes(m.tenant_name)
           end
         end
       end
